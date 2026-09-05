@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+  /* Espace pour la bottom nav mobile */
+  @media (max-width: 767px) {
+    body.has-bottomnav main {
+      padding-bottom: calc(64px + var(--safe-bottom));
+    }
+  }
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-600/20 transition-all duration-150 hover:bg-brand-700 hover:shadow-md hover:shadow-brand-600/25 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-150 hover:border-slate-400 hover:bg-slate-50 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50;
+  }
+  .card {
+    @apply rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-shadow duration-200;
+  }
+  .input {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm outline-none transition-all duration-150 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10;
+    min-height: 44px; /* tap target mobile */
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500;
+  }
+  /* Skeleton de chargement */
+  .skeleton {
+    @apply animate-pulse rounded-lg bg-slate-200/80;
+  }
+}
+
+@layer utilities {
+  /* Apparition douce des contenus (respecte prefers-reduced-motion) */
+  .animate-in {
+    animation: fade-up 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) both;
+  }
+  .animate-in-delay {
+    animation: fade-up 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0.08s both;
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-in,
+    .animate-in-delay {
+      animation: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  .pb-safe {
+    padding-bottom: var(--safe-bottom);
+  }
+}

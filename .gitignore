@@ -1,0 +1,7 @@
+node_modules/
+.next/
+pgdata/
+storage/
+.env
+*.log
+.session-secret

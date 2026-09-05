@@ -1,0 +1,1 @@
+ALTER TABLE "bookings" ADD COLUMN "caution_customer_id" text;
